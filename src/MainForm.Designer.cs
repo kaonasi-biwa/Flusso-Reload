@@ -345,7 +345,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Flusso";
+            this.Text = "Flusso Reload";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
