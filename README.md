@@ -1,5 +1,5 @@
 # Flusso Reload
-![](https://github.com/kaonasi_biwa/Flusso-Reload/raw/master/images/Flusso_Re.png)  
+<img src="https://github.com/kaonasi-biwa/Flusso-Reload/blob/main/images/Flusso_Re.png?raw=true" height=120px><br>  
 Flusso Reloadは、Flusso Legacyをもとに作られたものです。  
 要するに、後継って話です。  
 ちゃんと許可は取ってますよ！！  
