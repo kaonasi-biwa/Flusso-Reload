@@ -414,17 +414,22 @@ namespace SharpBrowser {
 		}
 
 		public void CloseActiveTab() {
-			if (CurTab != null/* && TabPages.Items.Count > 2*/) {
+			if (CurTab != null && TabPages.Items.Count > 2) {
 
 				// remove tab and save its index
 				int index = TabPages.Items.IndexOf(TabPages.SelectedItem);
 				TabPages.RemoveTab(TabPages.SelectedItem);
-
+				
 				// keep tab at same index focussed
 				if ((TabPages.Items.Count - 1) > index) {
 					TabPages.SelectedItem = TabPages.Items[index];
 				}
-			}
+            }
+			else if (CurTab != null && TabPages.Items.Count == 1)
+
+			{
+				this.Close();
+            }
 		}
 
 		private void OnTabClosed(object sender, EventArgs e) {
@@ -634,9 +639,9 @@ namespace SharpBrowser {
 			ChromiumWebBrowser browser = null;
 			try {
 				browser = ((ChromiumWebBrowser)e.Item.Controls[0]);
-			} catch (System.Exception ex) { }
+			} catch (System.Exception ex) { Console.WriteLine("error"); }
 
-
+		
 			if (e.ChangeType == BrowserTabStripItemChangeTypes.SelectionChanged) {
 				if (TabPages.SelectedItem == tabStripAdd) {
 					AddBlankTab();
@@ -655,10 +660,12 @@ namespace SharpBrowser {
 			}
 
 			if (e.ChangeType == BrowserTabStripItemChangeTypes.Removed) {
+				Console.WriteLine("close");
 				if (e.Item == downloadsStrip) downloadsStrip = null;
 				if (browser != null) {
 					browser.Dispose();
-				}
+                }
+                
 			}
 
 			if (e.ChangeType == BrowserTabStripItemChangeTypes.Changed) {
@@ -668,7 +675,6 @@ namespace SharpBrowser {
 					}
 				}
 			}
-			Console.WriteLine("aaa");
 
 		}
 

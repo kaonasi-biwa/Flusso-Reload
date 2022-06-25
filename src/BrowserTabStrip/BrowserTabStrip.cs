@@ -22,7 +22,7 @@ namespace SharpBrowser.BrowserTabStrip {
 		private int DEF_START_POS = 10;
 
 		private Rectangle stripButtonRect = Rectangle.Empty;
-
+		
 		private BrowserTabStripItem selectedItem;
 
 		private ContextMenuStrip menu;
@@ -318,12 +318,19 @@ namespace SharpBrowser.BrowserTabStrip {
 					return;
 				}
 				if (SelectedItem != null) {
+					Console.WriteLine("Close2");
 					TabStripItemClosingEventArgs tabStripItemClosingEventArgs = new TabStripItemClosingEventArgs(SelectedItem);
 					OnTabStripItemClosing(tabStripItemClosingEventArgs);
-					if (!tabStripItemClosingEventArgs.Cancel && SelectedItem.CanClose) {
+					if (this.Items.Count <= 2)
+					{
+						Application.Exit();
+					}
+					if (!tabStripItemClosingEventArgs.Cancel && SelectedItem.CanClose && this.Items.Count > 2) {
 						RemoveTab(SelectedItem);
 						OnTabStripItemClosed(EventArgs.Empty);
+						Console.WriteLine("NotCloseApp");
 					}
+
 				}
 				Invalidate();
 			}
