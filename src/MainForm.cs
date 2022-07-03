@@ -239,6 +239,13 @@ namespace SharpBrowser {
 					(Uri.TryCreate(newUrl, UriKind.Absolute, out outUri)
 					 && ((outUri.Scheme == Uri.UriSchemeHttp || outUri.Scheme == Uri.UriSchemeHttps) && newUrl.Contains(".") || outUri.Scheme == Uri.UriSchemeFile))) {
 
+				}
+				else if (urlLower.IndexOf(":") != -1)
+				{
+
+					// run search if unknown URL
+					newUrl = url;
+
 				} else {
 
 					// run search if unknown URL
