@@ -41,6 +41,7 @@
             this.BtnDownloads = new System.Windows.Forms.Button();
             this.TxtURL = new System.Windows.Forms.TextBox();
             this.PanelToolbar = new System.Windows.Forms.Panel();
+            this.BtnHistory = new System.Windows.Forms.Button();
             this.BtnHome = new System.Windows.Forms.Button();
             this.PanelStatus = new System.Windows.Forms.Panel();
             this.PanelSearch = new System.Windows.Forms.Panel();
@@ -88,7 +89,7 @@
             this.BtnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnRefresh.ForeColor = System.Drawing.Color.White;
             this.BtnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("BtnRefresh.Image")));
-            this.BtnRefresh.Location = new System.Drawing.Point(878, 0);
+            this.BtnRefresh.Location = new System.Drawing.Point(844, 0);
             this.BtnRefresh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(25, 30);
@@ -103,7 +104,7 @@
             this.BtnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnStop.ForeColor = System.Drawing.Color.White;
             this.BtnStop.Image = ((System.Drawing.Image)(resources.GetObject("BtnStop.Image")));
-            this.BtnStop.Location = new System.Drawing.Point(878, -2);
+            this.BtnStop.Location = new System.Drawing.Point(844, 0);
             this.BtnStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnStop.Name = "BtnStop";
             this.BtnStop.Size = new System.Drawing.Size(25, 30);
@@ -168,7 +169,7 @@
             this.TxtURL.Location = new System.Drawing.Point(60, 5);
             this.TxtURL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtURL.Name = "TxtURL";
-            this.TxtURL.Size = new System.Drawing.Size(812, 27);
+            this.TxtURL.Size = new System.Drawing.Size(747, 27);
             this.TxtURL.TabIndex = 5;
             this.TxtURL.Click += new System.EventHandler(this.txtUrl_Click);
             this.TxtURL.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
@@ -177,13 +178,14 @@
             // PanelToolbar
             // 
             this.PanelToolbar.BackColor = System.Drawing.Color.White;
+            this.PanelToolbar.Controls.Add(this.BtnHistory);
             this.PanelToolbar.Controls.Add(this.BtnHome);
-            this.PanelToolbar.Controls.Add(this.TxtURL);
             this.PanelToolbar.Controls.Add(this.BtnDownloads);
             this.PanelToolbar.Controls.Add(this.BtnForward);
             this.PanelToolbar.Controls.Add(this.BtnBack);
             this.PanelToolbar.Controls.Add(this.BtnRefresh);
             this.PanelToolbar.Controls.Add(this.BtnStop);
+            this.PanelToolbar.Controls.Add(this.TxtURL);
             this.PanelToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelToolbar.Location = new System.Drawing.Point(0, 0);
             this.PanelToolbar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -191,13 +193,28 @@
             this.PanelToolbar.Size = new System.Drawing.Size(934, 34);
             this.PanelToolbar.TabIndex = 6;
             // 
+            // BtnHistory
+            // 
+            this.BtnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnHistory.ForeColor = System.Drawing.Color.White;
+            this.BtnHistory.Image = ((System.Drawing.Image)(resources.GetObject("BtnHistory.Image")));
+            this.BtnHistory.Location = new System.Drawing.Point(875, 0);
+            this.BtnHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnHistory.Name = "BtnHistory";
+            this.BtnHistory.Size = new System.Drawing.Size(25, 30);
+            this.BtnHistory.TabIndex = 7;
+            this.BtnHistory.Tag = "履歴";
+            this.BtnHistory.UseVisualStyleBackColor = true;
+            this.BtnHistory.Click += new System.EventHandler(this.BtnHistory_Click);
+            // 
             // BtnHome
             // 
             this.BtnHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnHome.ForeColor = System.Drawing.Color.White;
             this.BtnHome.Image = ((System.Drawing.Image)(resources.GetObject("BtnHome.Image")));
-            this.BtnHome.Location = new System.Drawing.Point(847, 0);
+            this.BtnHome.Location = new System.Drawing.Point(813, 0);
             this.BtnHome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnHome.Name = "BtnHome";
             this.BtnHome.Size = new System.Drawing.Size(25, 30);
@@ -383,6 +400,7 @@
 		private System.Windows.Forms.Button BtnNextSearch;
         private System.Windows.Forms.Button BtnHome;
         private BrowserTabStrip.BrowserTabStripItem tabStrip1;
+        private System.Windows.Forms.Button BtnHistory;
     }
 }
 

@@ -204,15 +204,16 @@ namespace SharpBrowser {
 
 			// if NOT FOUND
 			if (code == 404) {
-
+				/*
 					// show offline "file not found" page
 					frame.LoadUrl(MainForm.FileNotFoundURL + "?path=" + request.Url.EncodeURL());
-
+				*/
 			}
 
 
 			// if FILE NOT FOUND
 			else if (request.Url.IsURLOfflineFile()) {
+				/*
 				string path = request.Url.FileURLToPath();
 				if (path.FileNotExists()) {
 
@@ -221,6 +222,7 @@ namespace SharpBrowser {
 					Console.WriteLine(MainForm.FileNotFoundURL + "?path=" + path.EncodeURL());
 
 				}
+				*/
 			}
 			else {
 

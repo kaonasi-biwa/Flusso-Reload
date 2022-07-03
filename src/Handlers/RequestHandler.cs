@@ -110,6 +110,7 @@ namespace SharpBrowser {
 		//     Return true to cancel the navigation or false to allow the navigation to
 		//     proceed.
 		public bool OnBeforeBrowse(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect) {
+			//Console.WriteLine("aaa");
 			return false;
 		}
 		

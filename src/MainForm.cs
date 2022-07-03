@@ -14,6 +14,8 @@ using SharpBrowser.BrowserTabStrip;
 using Timer = System.Windows.Forms.Timer;
 using System.Drawing;
 using System.Reflection;
+using System.Text;
+using System.Collections;
 
 namespace SharpBrowser {
 
@@ -23,6 +25,9 @@ namespace SharpBrowser {
 	/// If you would only like to support 64-bit machines, simply change the DLL references.
 	/// </summary>
 	internal partial class MainForm : Form {
+
+
+		string beforeHistory;
 
 		private string appPath = Path.GetDirectoryName(Application.ExecutablePath) + @"\";
 
@@ -35,6 +40,7 @@ namespace SharpBrowser {
 		public static string NewTabURL = "https://www.google.com/ja";
 		public static string InternalURL = "flusso";
 		public static string DownloadsURL = "flusso://storage/downloads.html";
+		public static string HistoryURL = "flusso://storage/history.html";
 		public static string FileNotFoundURL = "flusso://storage/errors/notFound.html";
 		public static string CannotConnectURL = "flusso://storage/errors/cannotConnect.html";
 		public static string SearchURL = "https://www.google.co.jp/search?q=";
@@ -173,6 +179,7 @@ namespace SharpBrowser {
 			rHandler = new RequestHandler(this);
 
 			InitDownloads();
+			InitHistory();
 
 			host = new HostHandler(this);
 
@@ -200,10 +207,6 @@ namespace SharpBrowser {
 
 
 		private static string GetAppDir(string name) {
-			string winXPDir = @"C:\Documents and Settings\All Users\Application Data\";
-			if (Directory.Exists(winXPDir)) {
-				return winXPDir + Branding + @"\" + name + @"\";
-			}
 			return @"C:\ProgramData\" + Branding + @"\" + name + @"\";
 
 		}
@@ -585,6 +588,15 @@ namespace SharpBrowser {
 			BrowserTabStripItem tabStrip = (BrowserTabStripItem)browser.Parent;
 			tabStrip.Title = text;
 
+			if(text != "読み込み中..." && browser.Address != beforeHistory && browser.Address.StartsWith("http"))
+            {
+				AddHistory(URL: browser.Address, Name: text);
+				beforeHistory = browser.Address;
+
+			}
+
+
+
 
 			// if current tab
 			if (browser == CurBrowser) {
@@ -781,6 +793,21 @@ namespace SharpBrowser {
 		#region Download Queue
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+			if (!File.Exists(GetAppDir("Data") + @"Hinstory.json"))
+			{
+				FileInfo fileInfo = new FileInfo(GetAppDir("Data") + @"Hinstory.json");
+				// フォルダーが存在するかどうかを確認
+				if (!fileInfo.Directory.Exists)
+				{
+					// フォルダーが存在しない場合は作成
+					fileInfo.Directory.Create();
+				}
+				// ファイルを作成する
+				FileStream fileStream = fileInfo.Create();
+				fileStream.Close();
+			}
+			File.WriteAllText(GetAppDir("Data") + @"Hinstory.json", JSON.Instance.ToJSON(History), Encoding.UTF8);
+
 
 			// ask user if they are sure
 			if (DownloadsInProgress()) {
@@ -861,12 +888,14 @@ namespace SharpBrowser {
 		}
 
 		public void OpenDownloadsTab() {
+			/*
 			if (downloadsStrip != null && ((ChromiumWebBrowser)downloadsStrip.Controls[0]).Address == DownloadsURL) {
 				TabPages.SelectedItem = downloadsStrip;
 			} else {
 				ChromiumWebBrowser brw = AddNewBrowserTab(DownloadsURL);
 				downloadsStrip = (BrowserTabStripItem)brw.Parent;
 			}
+			*/
 		}
 
 		#endregion
@@ -946,8 +975,53 @@ namespace SharpBrowser {
         {
 			CurBrowser.Load(HomepageURL);
         }
-        #endregion
-    }
+		#endregion
+
+
+
+		public List<Dictionary<string, string>> History = new List<Dictionary<string, string>>();
+
+
+		public void AddHistory(string Name, string URL)
+        {
+			DateTime dt = DateTime.Now;
+			var add = new Dictionary<string, string> { { "Name", Name }, { "URL", URL }, { "Day", dt.ToString("yyyy/MM/dd") }, { "Time", dt.ToString("HH:mm:ss") } };
+			History.Add(add);
+
+			//Console.WriteLine(Name);
+			//Console.WriteLine(URL);
+			string aaaa = JSON.Instance.ToJSON(History);
+			//Console.WriteLine(aaaa);
+		}
+
+        private void BtnHistory_Click(object sender, EventArgs e)
+        {
+			AddNewBrowserTab(HistoryURL);
+		}
+
+		public void InitHistory()
+		{
+			
+			if(File.Exists(GetAppDir("Data") + @"Hinstory.json"))
+            {
+			StreamReader sr = new StreamReader(GetAppDir("Data") + @"Hinstory.json", Encoding.UTF8);
+			ArrayList history_json = JSON.Instance.Parse(sr.ReadToEnd()) as ArrayList;
+			sr.Close();
+
+				List<Dictionary<string, object>> list = history_json.Cast<Dictionary<string,object>>().ToList();
+				foreach (var val in list)
+				{
+					var temp = val.ToDictionary(k => k.Key, k => k.Value.ToString());
+					History.Add(temp);
+				}
+
+			}
+			
+
+
+
+		}
+	}
 }
 
 /// <summary>

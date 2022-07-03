@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using System;
 
 namespace SharpBrowser {
 	internal class DownloadHandler : IDownloadHandler {
@@ -11,7 +12,6 @@ namespace SharpBrowser {
 		public void OnBeforeDownload(IWebBrowser webBrowser, IBrowser browser, DownloadItem item, IBeforeDownloadCallback callback) {
 			if (!callback.IsDisposed) {
 				using (callback) {
-
 					myForm.UpdateDownloadItem(item);
 
 					// ask browser what path it wants to save the file into
@@ -40,7 +40,7 @@ namespace SharpBrowser {
 			if (downloadItem.IsInProgress && myForm.CancelRequests.Contains(downloadItem.Id)) {
 				callback.Cancel();
 			}
-			//Console.WriteLine(downloadItem.Url + " %" + downloadItem.PercentComplete + " complete");
+// Console.WriteLine(downloadItem.Url + " %" + downloadItem.PercentComplete + " complete");
 		}
 	}
 }

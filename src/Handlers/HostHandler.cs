@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.Json;
+using System.Collections;
 
 namespace SharpBrowser {
 
@@ -35,6 +37,28 @@ namespace SharpBrowser {
 		}
 		public void refreshActiveTab() {
 			myForm.RefreshActiveTab();
+		}
+
+		public string getHistory()
+		{
+			lock (myForm.History)
+			{
+				string x = JSON.Instance.ToJSON(myForm.History);
+				return x;
+
+
+			}
+		}
+
+		public void clearHistory()
+		{
+			lock (myForm.History)
+			{
+				Console.WriteLine("aaaaaaaa");
+				myForm.History = new List<Dictionary<string, string>>();
+
+
+			}
 		}
 	}
 
