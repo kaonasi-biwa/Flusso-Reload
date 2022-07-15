@@ -4,7 +4,10 @@ using System;
 namespace SharpBrowser {
 	internal class DownloadHandler : IDownloadHandler {
 		readonly MainForm myForm;
-
+		public bool CanDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, string url, string requestMethod)
+		{
+			return true;
+		}
 		public DownloadHandler(MainForm form) {
 			myForm = form;
 		}

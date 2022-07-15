@@ -153,7 +153,8 @@ namespace SharpBrowser {
 		/// </summary>
 		private void InitBrowser() {
 
-			CefSharpSettings.LegacyJavascriptBindingEnabled = true;
+			//CefSharpSettings.LegacyJavascriptBindingEnabled = true;
+			Cef.EnableHighDPISupport();
 			CefSharpSettings.WcfEnabled = false;
 
 			CefSettings settings = new CefSettings();
@@ -195,11 +196,11 @@ namespace SharpBrowser {
 
 			BrowserSettings config = new BrowserSettings();
 
-			config.FileAccessFromFileUrls = (!CrossDomainSecurity).ToCefState();
-			config.UniversalAccessFromFileUrls = (!CrossDomainSecurity).ToCefState();
-			config.WebSecurity = WebSecurity.ToCefState();
-			config.WebGl = WebGL.ToCefState();
-			config.ApplicationCache = ApplicationCache.ToCefState();
+			//config.FileAccessFromFileUrls = (!CrossDomainSecurity).ToCefState();
+			//config.UniversalAccessFromFileUrls = (!CrossDomainSecurity).ToCefState();
+			//config.WebSecurity = WebSecurity.ToCefState();
+			//config.WebGl = WebGL.ToCefState();
+			//config.ApplicationCache = ApplicationCache.ToCefState();
 
 			browser.BrowserSettings = config;
 
@@ -369,7 +370,7 @@ namespace SharpBrowser {
 
 			// set layout
 			browser.Dock = DockStyle.Fill;
-			browser.Top = 29;
+			browser.Top = 60;
 			browser.BringToFront();
 			tabStrip.Controls.Add(browser);
 
@@ -588,6 +589,7 @@ namespace SharpBrowser {
 			BrowserTabStripItem tabStrip = (BrowserTabStripItem)browser.Parent;
 			tabStrip.Title = text;
 
+
 			if(text != "読み込み中..." && browser.Address != beforeHistory && browser.Address.StartsWith("http"))
             {
 				AddHistory(URL: browser.Address, Name: text);
@@ -658,7 +660,7 @@ namespace SharpBrowser {
 			ChromiumWebBrowser browser = null;
 			try {
 				browser = ((ChromiumWebBrowser)e.Item.Controls[0]);
-			} catch (System.Exception ex) { Console.WriteLine("error"); }
+			} catch (System.Exception ex) { }
 
 		
 			if (e.ChangeType == BrowserTabStripItemChangeTypes.SelectionChanged) {
@@ -946,7 +948,7 @@ namespace SharpBrowser {
 			bool first = lastSearch != TxtSearch.Text;
 			lastSearch = TxtSearch.Text;
 			if (lastSearch.CheckIfValid()) {
-				CurBrowser.GetBrowser().Find(0, lastSearch, true, false, !first);
+				CurBrowser.GetBrowser().Find(lastSearch, true, false, !first);
 			} else {
 				CurBrowser.GetBrowser().StopFinding(true);
 			}

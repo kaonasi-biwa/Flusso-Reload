@@ -13,9 +13,9 @@ namespace SharpBrowser.BrowserTabStrip {
 
 		private const int TEXT_RIGHT_MARGIN = 10;
 
-		private const int DEF_HEADER_HEIGHT = 28;
+		private const int DEF_HEADER_HEIGHT = 42;
 
-		private const int DEF_BUTTON_HEIGHT = 28;
+		private const int DEF_BUTTON_HEIGHT = 42;
 
 		private const int DEF_GLYPH_WIDTH = 40;
 
@@ -267,10 +267,10 @@ namespace SharpBrowser.BrowserTabStrip {
 			Rectangle clientRectangle = base.ClientRectangle;
 			clientRectangle.Width--;
 			clientRectangle.Height--;
-			DEF_START_POS = 10;
+			DEF_START_POS = 20;
 			e.Graphics.DrawRectangle(SystemPens.ControlDark, clientRectangle);
 			e.Graphics.FillRectangle(Brushes.White, clientRectangle);
-			e.Graphics.FillRectangle(SystemBrushes.GradientInactiveCaption, new Rectangle(clientRectangle.X, clientRectangle.Y, clientRectangle.Width, 28));
+			e.Graphics.FillRectangle(SystemBrushes.GradientInactiveCaption, new Rectangle(clientRectangle.X, clientRectangle.Y, clientRectangle.Width, 42));
 			e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 			for (int i = 0; i < Items.Count; i++) {
 				BrowserTabStripItem fATabStripItem = Items[i];
@@ -284,14 +284,14 @@ namespace SharpBrowser.BrowserTabStrip {
 				OnDrawTabButton(e.Graphics, selectedItem);
 			}
 			if (Items.DrawnCount == 0 || Items.VisibleCount == 0) {
-				e.Graphics.DrawLine(SystemPens.ControlDark, new Point(0, 28), new Point(base.ClientRectangle.Width, 28));
+				e.Graphics.DrawLine(SystemPens.ControlDark, new Point(0, 42), new Point(base.ClientRectangle.Width, 42));
 			}
 			else if (SelectedItem != null && SelectedItem.IsDrawn) {
 				int num = (int)(SelectedItem.StripRect.Height / 4f);
-				Point point = new Point((int)SelectedItem.StripRect.Left - num, 28);
-				e.Graphics.DrawLine(SystemPens.ControlDark, new Point(0, 28), point);
+				Point point = new Point((int)SelectedItem.StripRect.Left - num, 42);
+				e.Graphics.DrawLine(SystemPens.ControlDark, new Point(0, 42), point);
 				point.X += (int)SelectedItem.StripRect.Width + num * 2;
-				e.Graphics.DrawLine(SystemPens.ControlDark, point, new Point(base.ClientRectangle.Width, 28));
+				e.Graphics.DrawLine(SystemPens.ControlDark, point, new Point(base.ClientRectangle.Width, 42));
 			}
 			if (SelectedItem != null && SelectedItem.CanClose) {
 				closeButton.IsVisible = true;
@@ -397,12 +397,12 @@ namespace SharpBrowser.BrowserTabStrip {
 					num = MaxTabSize;
 				}
 			}
-			RectangleF rectangleF2 = (currentItem.StripRect = new RectangleF(DEF_START_POS, 3f, num, 28f));
+			RectangleF rectangleF2 = (currentItem.StripRect = new RectangleF(DEF_START_POS, 6f, num, 42f));
 			DEF_START_POS += num;
 		}
 
 		private SizeF MeasureTabWidth(Graphics g, BrowserTabStripItem currentItem, Font currentFont) {
-			SizeF result = g.MeasureString(currentItem.Title, currentFont, new SizeF(200f, 28f), sf);
+			SizeF result = g.MeasureString(currentItem.Title, currentFont, new SizeF(200f, 42f), sf);
 			result.Width += 25f;
 			return result;
 		}
@@ -414,7 +414,7 @@ namespace SharpBrowser.BrowserTabStrip {
 			GraphicsPath graphicsPath = new GraphicsPath();
 			float left = stripRect.Left;
 			float right = stripRect.Right;
-			float num = 3f;
+			float num = 6f;
 			float num2 = stripRect.Bottom - 1f;
 			float num3 = stripRect.Width;
 			float num4 = stripRect.Height;
@@ -449,8 +449,8 @@ namespace SharpBrowser.BrowserTabStrip {
 			sf.Trimming = StringTrimming.EllipsisCharacter;
 			sf.FormatFlags |= StringFormatFlags.NoWrap;
 			sf.FormatFlags &= StringFormatFlags.DirectionRightToLeft;
-			stripButtonRect = new Rectangle(0, 0, base.ClientSize.Width - 40 - 2, 10);
-			base.DockPadding.Top = 29;
+			stripButtonRect = new Rectangle(0, 0, base.ClientSize.Width - 42, 10);
+			base.DockPadding.Top = 42;
 			base.DockPadding.Bottom = 1;
 			base.DockPadding.Right = 1;
 			base.DockPadding.Left = 1;

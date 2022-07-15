@@ -18,7 +18,7 @@ namespace SharpBrowser.BrowserTabStrip {
 		}
 
 		public void CalcBounds(BrowserTabStripItem tab) {
-			Rect = new Rectangle((int)tab.StripRect.Right - 20, (int)tab.StripRect.Top + 5, 15, 15);
+			Rect = new Rectangle((int)tab.StripRect.Right - 30, (int)tab.StripRect.Top + 5, 15, 15);
 			RedrawRect = new Rectangle(Rect.X - 2, Rect.Y - 2, Rect.Width + 4, Rect.Height + 4);
 		}
 
@@ -29,7 +29,7 @@ namespace SharpBrowser.BrowserTabStrip {
 				if (IsMouseOver) {
 					g.FillEllipse(Brushes.IndianRed, Rect);
 				}
-				int num = 4;
+				int num = 2;
 				Pen pen = new Pen(color, 1.6f);
 				g.DrawLine(pen, Rect.Left + num, Rect.Top + num, Rect.Right - num, Rect.Bottom - num);
 				g.DrawLine(pen, Rect.Right - num, Rect.Top + num, Rect.Left + num, Rect.Bottom - num);

@@ -328,10 +328,9 @@
             // 
             // tabStrip1
             // 
-            this.tabStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+
             this.tabStrip1.IsDrawn = true;
-            this.tabStrip1.Location = new System.Drawing.Point(1, 29);
+
             this.tabStrip1.Name = "tabStrip1";
             this.tabStrip1.Selected = true;
             this.tabStrip1.Size = new System.Drawing.Size(932, 587);
